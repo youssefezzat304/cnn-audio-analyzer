@@ -66,7 +66,7 @@ Follow these steps to install and set up the project.
 ### Clone the Repository
 
 ```bash
-https://github.com/youssefezzat304/cnn-audio-analyzer.git
+clone https://github.com/youssefezzat304/cnn-audio-analyzer.git
 ```
 
 ### Backend
