@@ -51,13 +51,13 @@ This graph shows the model's loss decreasing over time for both the training and
 
 This graph plots the model's accuracy on the validation dataset as training progresses. Accuracy measures the percentage of correct predictions. The upward trend in the curve indicates that the model's performance is improving over time, with the model reaching best accuracy of 84% by the end of training.
 
-![img](images\acc_val_graph.png)
+![img](images/acc_val_graph.png)
 
 ### Learning rate
 
 This graph shows how the learning rate changed during the training process. The learning rate controls how much the model's weights are adjusted in response to the estimated error each time the model's weights are updated. The curve shows a typical learning rate schedule, where the rate increases at the beginning (warm-up) and then gradually decreases to help the model converge more smoothly.
 
-![img](images\lr_graph.png)
+![img](images/lr_graph.png)
 
 ## Credits
 
