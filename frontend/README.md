@@ -1,29 +1,33 @@
-# Create T3 App
+## What to Expect After Uploading a File
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+After you select a `.wav` audio file, the CNN Audio Visualizer will process it and display a comprehensive analysis. Here’s a breakdown of the results you will see.
 
-## What's next? How do I make an app with this?
+### 1. Start by Uploading a File
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+The initial interface is simple. Click the **"Choose File"** button to select a local `.wav` file from your computer.
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+![img](..\images\upload_file.png)
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+### 2. View the Model's Predictions
 
-## Learn More
+Once the file is processed, the first thing you'll see is the model's classification of the sound. The **Top Predictions** section shows a ranked list of the most likely sound categories, along with a confidence score for each.
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+![img](../images/predictions.png)
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+### 3. Analyze the Input Audio
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+Below the predictions, the application displays visualizations of the input sound file itself:
 
-## How do I deploy this?
+* **Input Spectrogram:** This is a visual representation of the spectrum of frequencies in the audio as they vary with time. This spectrogram is the actual data fed into the neural network.
+* **Audio Waveform:** This is the standard representation of the audio signal, showing its amplitude over time.
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+![img](../images/waveform.png)
+
+### 4. Explore the Neural Network's Internal Layers
+
+For a deeper look into how the model "thinks," the **Convolutional Layer Outputs** section visualizes the feature maps at different stages of the network.
+
+* You can see how the representation of the audio becomes more abstract as it passes from the initial layers (`layer1`) to the deeper layers (`layer4`).
+* Each layer's view can be expanded to inspect the outputs of its specific sub-components, such as the convolution (`conv`) and ReLU activation (`relu`) steps. This allows you to see the features the network learns to detect at each stage.
+
+![img]()
