@@ -62,7 +62,7 @@ export default function HomePage() {
         );
 
         const response = await fetch(
-          "https://youssefezzat304--audio-cnn-inference-audioclassifier-inference.modal.run",
+          "<inference_url_here>",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
