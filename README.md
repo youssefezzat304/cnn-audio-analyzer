@@ -107,7 +107,7 @@ modal deploy main.py
 install dependencies
 
 ```bash
-cd audio-cnn-visualisation
+cd frontend
 npm i
 ```
 
