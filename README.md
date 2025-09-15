@@ -117,7 +117,7 @@ run
 npm run dev
 ```
 
-Credits
+## Credits
 
 This project is based on and modified from the work by [Andreaswt](https://github.com/Andreaswt).
 
