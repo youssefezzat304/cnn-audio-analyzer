@@ -6,7 +6,7 @@ After you select a `.wav` audio file, the CNN Audio Visualizer will process it a
 
 The initial interface is simple. Click the **"Choose File"** button to select a local `.wav` file from your computer.
 
-![img](..\images\upload_file.png)
+![img](../images/upload_file.png)
 
 ### 2. View the Model's Predictions
 
@@ -30,4 +30,4 @@ For a deeper look into how the model "thinks," the **Convolutional Layer Outputs
 * You can see how the representation of the audio becomes more abstract as it passes from the initial layers (`layer1`) to the deeper layers (`layer4`).
 * Each layer's view can be expanded to inspect the outputs of its specific sub-components, such as the convolution (`conv`) and ReLU activation (`relu`) steps. This allows you to see the features the network learns to detect at each stage.
 
-![img]()
+![img](../images/layers_viz.png)
