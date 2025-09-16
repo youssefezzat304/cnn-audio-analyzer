@@ -50,7 +50,7 @@ class InferenceRequest(BaseModel):
     audio_data: str
 
 
-@app.cls(image=image, gpu="A10G", volumes={"/models": model_volume}, scaledown_window=15)
+@app.cls(image=image, volumes={"/models": model_volume}, scaledown_window=15)
 class AudioClassifier:
     @modal.enter()
     def load_model(self):
@@ -140,7 +140,7 @@ class AudioClassifier:
 
 @app.local_entrypoint()
 def main():
-    audio_data, sample_rate = sf.read("example.wav") # Select a .wav file
+    audio_data, sample_rate = sf.read("example.wav")
 
     buffer = io.BytesIO()
     sf.write(buffer, audio_data, sample_rate, format="WAV")

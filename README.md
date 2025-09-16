@@ -59,64 +59,6 @@ This graph shows how the learning rate changed during the training process. The 
 
 ![img](images/lr_graph.png)
 
-## Setup
-
-Follow these steps to install and set up the project.
-
-### Clone the Repository
-
-```bash
-clone https://github.com/youssefezzat304/cnn-audio-analyzer.git
-```
-
-### Backend
-
-Navigate to the folder
-
-```bash
-cd cnn-audio-analyzer
-
-```
-
-Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-Modal setup
-
-```bash
-modal setup
-```
-
-Run on Modal
-
-```
-modal run main.py
-```
-
-Deploy backend
-
-```
-modal deploy main.py
-```
-
-### Frontend
-
-install dependencies
-
-```bash
-cd frontend
-npm i
-```
-
-run
-
-```bash
-npm run dev
-```
-
 ## Credits
 
 This project is based on and modified from the work by [Andreaswt](https://github.com/Andreaswt).

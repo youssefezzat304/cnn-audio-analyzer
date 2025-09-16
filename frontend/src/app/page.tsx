@@ -9,23 +9,36 @@ import { Progress } from "~/components/ui/progress";
 import ColorScale from "~/components/ColorScale";
 import FeatureMap from "~/components/FeatureMap";
 import Waveform from "~/components/WaveForm";
+import { Client, handle_file } from "@gradio/client";
+import AudioPlayer from "~/components/AudioPlayer";
 
 const getEmojiForClass = (className: string): string => {
-  return ESC50_EMOJI_MAP[className] ?? "🔈";
+  return ESC50_EMOJI_MAP[className] ?? "📈";
 };
 
 function splitLayers(visualization: VisualizationData) {
   const main: [string, LayerData][] = [];
   const internals: Record<string, [string, LayerData][]> = {};
+
   for (const [name, data] of Object.entries(visualization)) {
+    const layerData: LayerData = Array.isArray(data)
+      ? {
+          values: data,
+          shape: [
+            (data as number[]).length,
+            ((data as number[])[0] as number[] | undefined)?.length ?? 0,
+          ].filter((x): x is number => x > 0),
+        }
+      : data;
+
     if (!name.includes(".")) {
-      main.push([name, data]);
+      main.push([name, layerData]);
     } else {
       const [parent] = name.split(".");
       if (parent === undefined) continue;
 
       internals[parent] ??= [];
-      internals[parent].push([name, data]);
+      internals[parent].push([name, layerData]);
     }
   }
 
@@ -38,6 +51,9 @@ export default function HomePage() {
   const [fileName, setFileName] = useState("");
   const [error, setError] = useState<string | null>(null);
 
+  const [audioURL, setAudioURL] = useState<string | null>(null);
+  const [audioFile, setAudioFile] = useState<File | null>(null);
+
   const handleFileChange = async (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
@@ -45,49 +61,29 @@ export default function HomePage() {
     if (!file) return;
 
     setFileName(file.name);
+    setAudioFile(file);
+    setAudioURL(URL.createObjectURL(file));
     setIsLoading(true);
     setError(null);
     setVizData(null);
 
-    const reader = new FileReader();
-    reader.readAsArrayBuffer(file);
-    reader.onload = async () => {
-      try {
-        const arrayBuffer = reader.result as ArrayBuffer;
-        const base64String = btoa(
-          new Uint8Array(arrayBuffer).reduce(
-            (data, byte) => data + String.fromCharCode(byte),
-            "",
-          ),
-        );
+    try {
+      const app = await Client.connect(
+        "youssefabdelrahim304/cnn-audio-analyzer",
+      );
 
-        const response = await fetch(
-          "<inference_url_here>",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ audio_data: base64String }),
-          },
-        );
+      const result = await app.predict("/classify_audio", [handle_file(file)]);
 
-        if (!response.ok) {
-          throw new Error(`API error ${response.statusText}`);
-        }
+      const responseData = (
+        Array.isArray(result.data) ? result.data[0] : result.data
+      ) as ApiResponse;
 
-        const data = (await response.json()) as ApiResponse;
-        setVizData(data);
-      } catch (err) {
-        setError(
-          err instanceof Error ? err.message : "An unknown error occured",
-        );
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    reader.onerror = () => {
-      setError("Failed ot read the file.");
+      setVizData(responseData);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : String(err));
+    } finally {
       setIsLoading(false);
-    };
+    }
   };
 
   const { main, internals } = vizData
@@ -126,6 +122,12 @@ export default function HomePage() {
                 {isLoading ? "Analysing..." : "Choose File"}
               </Button>
             </div>
+
+            {audioURL && (
+              <div className="m-4">
+                <AudioPlayer src={audioURL} file={audioFile} />
+              </div>
+            )}
 
             {fileName && (
               <Badge
@@ -223,7 +225,7 @@ export default function HomePage() {
                         </h4>
                         <FeatureMap
                           data={mainData.values}
-                          title={`${mainData.shape.join(" x ")}`}
+                          title={`${mainData.shape?.join(" x ") ?? "Unknown shape"}`}
                         />
                       </div>
 
