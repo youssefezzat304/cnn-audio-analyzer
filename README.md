@@ -1,4 +1,12 @@
+
+# CNN Audio Analyzer
+
 This project implements a **deep learning pipeline** for classifying environmental sounds using the [ESC-50 dataset](https://github.com/karoldvl/ESC-50). It combines a custom **ResNet-style CNN architecture** with a training pipeline that leverages modern audio preprocessing and augmentation techniques.
+
+[![Hugging Face Space](https://img.shields.io/badge/Hugging%20Face-Space-orange)](https://huggingface.co/spaces/youssefabdelrahim304/cnn-audio-analyzer)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-brightgreen)](https://cnn-audio-analyzer.vercel.app/)
+
+Try the model interactively on the Hugging Face Space or open the full web demo.
 
 ## Architecture
 

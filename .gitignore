@@ -48,3 +48,4 @@ env/
 .modal*
 brca1_analysis_plot.png
 best_model.pth
+.vscode/
