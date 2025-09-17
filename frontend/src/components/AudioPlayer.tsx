@@ -101,9 +101,7 @@ export default function AudioPlayer({
       <CardContent className="flex flex-col items-center gap-4 md:flex-row">
         <audio ref={audioRef} src={finalSrc ?? undefined} preload="metadata" />
 
-        {/* Controls */}
         <div className="flex w-full flex-col items-center gap-3 sm:flex-row">
-          {/* Play / Pause */}
           <div className="flex-shrink-0">
             <Button
               variant="ghost"
@@ -119,7 +117,6 @@ export default function AudioPlayer({
             </Button>
           </div>
 
-          {/* Seek bar (full width on small screens, fixed on md+) */}
           <div className="w-full md:w-64">
             <input
               aria-label="Seek"
@@ -137,7 +134,6 @@ export default function AudioPlayer({
             </div>
           </div>
 
-          {/* Volume control */}
           <div className="flex w-full items-center gap-2 sm:w-auto">
             <Volume2 className="h-4 w-4 text-stone-500" />
             <input
@@ -148,7 +144,7 @@ export default function AudioPlayer({
               step={0.01}
               value={volume}
               onChange={(e) => setVolume(Number(e.target.value))}
-              className="h-2 w-full rounded-lg sm:w-24"
+              className="h-2 w-full rounded-lg sm:w-24 accent-black"
             />
           </div>
         </div>

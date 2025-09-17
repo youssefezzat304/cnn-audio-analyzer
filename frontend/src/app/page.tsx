@@ -12,6 +12,7 @@ import Waveform from "~/components/WaveForm";
 import { Client, handle_file } from "@gradio/client";
 import AudioPlayer from "~/components/AudioPlayer";
 
+
 const getEmojiForClass = (className: string): string => {
   return ESC50_EMOJI_MAP[className] ?? "📈";
 };
